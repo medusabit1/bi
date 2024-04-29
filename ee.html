@@ -1,0 +1,44 @@
+
+<link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+var hh = localStorage.getItem("world");
+
+ axios.get('http://localhost:5000/gethtml')
+  .then((response) => {
+    hh = response.data
+    localStorage.setItem("world",response.data);
+   
+    // setTimeout(()=>{location.reload(); console.log("roloading");}, 5000 );
+   
+    // location.reload();
+    
+  });
+
+//   if(hh == null){
+//         console.log("inside if");
+//         localStorage.setItem("timer",1);
+//     location.reload();
+//     console.log(localStorage.getItem("timer"));
+//         // location.reload();setTimeout(()=>{location.reload()}, 1000 );
+//     }else{
+//         if(localStorage.getItem("timer") == 1){
+//             localStorage.setItem("timer",99999); 
+//             // location.reload()
+//             console.log(localStorage.getItem("timer"));
+//             // setTimeout(()=>{location.reload()}, localStorage.getItem("timer") );
+                      
+//         }else{
+//             setTimeout(()=>{location.reload()}, localStorage.getItem("timer") );
+//         }
+//         console.log("outside if");        
+//     }
+
+ //   setTimeout(()=>{location.reload(); console.log(1+1);}, 5000 );
+
+  document.write(unescape(localStorage.getItem("world")))
+
+    
+</script>

